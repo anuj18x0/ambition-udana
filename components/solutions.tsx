@@ -2,99 +2,88 @@
 
 import { useEffect, useRef } from "react";
 import { Monitor, Layers3, BrainCircuit } from "lucide-react";
+import { motion } from "motion/react";
 
 const solutions = [
   {
     icon: Monitor,
     title: "Interactive Sales Suite",
     description:
-      "A digital showroom that lets buyers explore projects, compare units, and self-serve — while your team closes, not presents.",
+      "A digital showroom that lets buyers explore, compare, and self-serve — so your team closes deals instead of giving tours.",
   },
   {
     icon: Layers3,
     title: "Immersive Experiences",
     description:
-      "Photorealistic walkthroughs, 3D floor plans, and virtual staging that make off-plan properties feel real and desirable.",
+      "Photorealistic walkthroughs, 3D floor plans, and virtual staging that make off-plan properties feel tangible and desirable.",
   },
   {
     icon: BrainCircuit,
     title: "AI-Powered Visualization",
     description:
-      "Generate styled interiors, personalize unit views to buyer taste, and auto-produce marketing assets — in seconds.",
+      "Generate styled interiors matched to buyer preferences. Produce marketing-ready assets in seconds, not weeks.",
   },
 ];
 
 export function Solutions() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const el = sectionRef.current;
+    const el = ref.current;
     if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const animateTargets = el.querySelectorAll("[data-animate]");
-            animateTargets.forEach((child, i) => {
-              (child as HTMLElement).style.opacity = "0";
-              setTimeout(() => {
-                child.classList.add("animate-fade-in-up");
-              }, i * 120);
-            });
-            observer.disconnect();
-          }
-        });
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          el.querySelectorAll("[data-animate]").forEach((c, i) => {
+            (c as HTMLElement).style.opacity = "0";
+            setTimeout(() => c.classList.add("animate-fade-in-up"), i * 120);
+          });
+          obs.disconnect();
+        }
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     );
-    observer.observe(el);
-    return () => observer.disconnect();
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-16 lg:py-20"
-      id="solutions"
-    >
+    <section ref={ref} className="py-28 lg:py-36" id="solutions">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        {/* Section Header */}
+        {/* Header */}
         <div className="max-w-2xl" data-animate>
-          <div className="section-divider mb-6" />
-          <h2 className="text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
+          <h2 className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl">
             One platform.
             <br />
-            Every tool to sell real estate digitally.
+            <span className="text-muted-foreground">Every tool to sell digitally.</span>
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Unada replaces fragmented point solutions with a single, unified
-            platform built for how modern property sales actually work.
+          <p className="mt-6 text-[1.05rem] font-light leading-[1.7] text-muted-foreground max-w-lg">
+            Replace fragmented point solutions with a unified system
+            built for how modern property sales actually work.
           </p>
         </div>
 
-        {/* Solution Cards */}
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
+        {/* Cards */}
+        <div className="mt-20 grid gap-8 md:grid-cols-3">
           {solutions.map((item, i) => (
-            <div
+            <motion.div
               key={item.title}
               data-animate
-              className={`group relative rounded-2xl border border-border/60 bg-white p-8 transition-all duration-500 hover:border-border hover:shadow-[0_4px_24px_rgba(0,0,0,0.04)] delay-${
-                (i + 1) * 100
-              }`}
+              whileHover={{ y: -4, transition: { duration: 0.3 } }}
+              className="group relative rounded-2xl border border-border/50 bg-white p-10 transition-shadow duration-500 hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)]"
             >
-              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f3f3f1] transition-colors duration-300 group-hover:bg-[#1a1a1a]">
-                <item.icon className="h-5 w-5 text-[#1a1a1a] transition-colors duration-300 group-hover:text-[#fafaf9]" />
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#f3f3f1] transition-all duration-400 group-hover:bg-[#1a1a1a] group-hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
+                <item.icon className="h-5 w-5 text-[#1a1a1a] transition-colors duration-400 group-hover:text-[#fafaf9]" />
               </div>
 
-              <h3 className="text-base font-semibold tracking-tight text-foreground">
+              <h3 className="text-lg font-semibold tracking-tight text-foreground">
                 {item.title}
               </h3>
 
-              <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-sm font-light leading-relaxed text-muted-foreground">
                 {item.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

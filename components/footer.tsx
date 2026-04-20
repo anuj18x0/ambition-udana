@@ -32,39 +32,37 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-border/60 bg-white py-16 lg:py-20">
+    <footer className="border-t border-border/40 bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
+        <div className="grid gap-16 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1a1a1a]">
-                <span className="text-sm font-bold text-[#fafaf9] tracking-tight">
-                  U
-                </span>
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#1a1a1a]">
+                <span className="text-sm font-bold text-[#fafaf9] tracking-tight">U</span>
               </div>
-              <span className="text-[15px] font-semibold tracking-tight text-foreground">
+              <span className="text-base font-semibold tracking-tight text-foreground">
                 Unada
               </span>
             </div>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              The modern platform for real-estate sales teams to sell properties
-              faster with digital experiences.
+            <p className="mt-5 max-w-xs text-sm font-light leading-relaxed text-muted-foreground">
+              The modern platform for real-estate sales teams to close
+              properties faster with immersive digital experiences.
             </p>
           </div>
 
-          {/* Link Columns */}
-          {links.map((group) => (
-            <div key={group.heading}>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/60">
-                {group.heading}
+          {/* Links */}
+          {links.map((g) => (
+            <div key={g.heading}>
+              <h4 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/50">
+                {g.heading}
               </h4>
-              <ul className="mt-4 space-y-3">
-                {group.items.map((item) => (
+              <ul className="mt-5 space-y-3.5">
+                {g.items.map((item) => (
                   <li key={item.label}>
                     <a
                       href={item.href}
-                      className="text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
+                      className="text-sm font-light text-muted-foreground transition-colors duration-300 hover:text-foreground"
                     >
                       {item.label}
                     </a>
@@ -75,19 +73,19 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 sm:flex-row">
-          <span className="text-xs text-muted-foreground/60">
+        {/* Bottom */}
+        <div className="mt-20 flex flex-col items-center justify-between gap-4 border-t border-border/40 pt-8 sm:flex-row">
+          <span className="text-xs font-light text-muted-foreground/50">
             © {currentYear} Unada. All rights reserved.
           </span>
           <div className="flex gap-6">
-            {["Twitter", "LinkedIn", "Instagram"].map((social) => (
+            {["Twitter", "LinkedIn", "Instagram"].map((s) => (
               <a
-                key={social}
+                key={s}
                 href="#"
-                className="text-xs text-muted-foreground/60 transition-colors duration-300 hover:text-foreground"
+                className="text-xs font-light text-muted-foreground/50 transition-colors duration-300 hover:text-foreground"
               >
-                {social}
+                {s}
               </a>
             ))}
           </div>
